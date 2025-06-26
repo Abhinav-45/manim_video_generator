@@ -1,0 +1,30 @@
+.App {
+  width: 100%;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+}
+
+/* Ensure full width on all containers */
+.App > * {
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+/* Performance optimizations */
+.App {
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+  will-change: auto;
+}
+
+/* GPU acceleration for smooth animations */
+.App * {
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  -webkit-perspective: 1000;
+  perspective: 1000;
+}
