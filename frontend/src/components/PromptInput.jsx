@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { generateVideo } from '../services/api';
 
+
 function PromptInput() {
   const [prompt, setPrompt] = useState('');
   const [videoUrl, setVideoUrl] = useState('');
@@ -16,10 +17,10 @@ function PromptInput() {
 
     try {
       const res = await generateVideo(prompt);
-      const filename = res.video_path.split('/').pop();
+      
 
       if (res.status === 'success') {
-        setVideoUrl(`http://localhost:8000/api/videos/${filename}`);
+        setVideoUrl(`http://localhost:8000/api/videos/${res.video_path}`);
       } else {
         setError(res.message || 'Unknown error occurred.');
       }

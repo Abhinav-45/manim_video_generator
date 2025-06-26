@@ -4,6 +4,7 @@ from fastapi import APIRouter
 from pydantic import BaseModel
 from app.services.gemini_service import generate_manim_code
 from app.services.manim_service import save_code_to_file, render_manim_video
+from pathlib import Path
 
 router = APIRouter()
 
@@ -30,6 +31,7 @@ async def generate(prompt_data: PromptRequest):
         return {"status": "error", "message": video_path}
 
     return {
-        "status": "success",
-        "video_path": video_path.replace("\\", "/")  # For Windows paths
-    }
+    "status": "success",
+    "video_path": Path(video_path).name  # just return filename
+}
+
