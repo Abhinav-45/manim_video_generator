@@ -6,6 +6,11 @@ from app.services.gemini_service import generate_manim_code
 from app.services.manim_service import save_code_to_file, render_manim_video
 from pathlib import Path
 
+# from backend.app.services import refine_prompt
+# from backend.app.services.file_service import delete_all_videos
+from app.services.file_service import delete_all_videos
+from app.services.refine_prompt import refine_prompt
+
 router = APIRouter()
 
 class PromptRequest(BaseModel):
@@ -13,10 +18,16 @@ class PromptRequest(BaseModel):
 
 @router.post("/generate")
 async def generate(prompt_data: PromptRequest):
-    prompt = prompt_data.prompt
+    raw_prompt = prompt_data.prompt
+    print("[Animation] Calling delete_all_videos()")
+
+    delete_all_videos()
+    
+
+    refined_prompt = refine_prompt(raw_prompt)
 
     # Step 1: Get Manim code from Gemini
-    manim_code = generate_manim_code(prompt)
+    manim_code = generate_manim_code(refined_prompt)
 
     if manim_code.startswith("# Error"):
         return {"status": "error", "message": manim_code}
