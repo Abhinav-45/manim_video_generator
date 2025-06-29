@@ -1,9 +1,0 @@
-# This file is used internally by FFMPEG.
-file 'file:C:/Users/ASUS/manim_portfolio/backend/outputs/videos/temp_scene/480p15/partial_movie_files/GeneratedScene/1185818338_2962155277_223132457.mp4'
-file 'file:C:/Users/ASUS/manim_portfolio/backend/outputs/videos/temp_scene/480p15/partial_movie_files/GeneratedScene/624642324_4129215145_60988092.mp4'
-file 'file:C:/Users/ASUS/manim_portfolio/backend/outputs/videos/temp_scene/480p15/partial_movie_files/GeneratedScene/624642324_3197093278_2406567213.mp4'
-file 'file:C:/Users/ASUS/manim_portfolio/backend/outputs/videos/temp_scene/480p15/partial_movie_files/GeneratedScene/624642324_2408024828_348844436.mp4'
-file 'file:C:/Users/ASUS/manim_portfolio/backend/outputs/videos/temp_scene/480p15/partial_movie_files/GeneratedScene/624642324_2485582873_294715787.mp4'
-file 'file:C:/Users/ASUS/manim_portfolio/backend/outputs/videos/temp_scene/480p15/partial_movie_files/GeneratedScene/624642324_2408024828_188040376.mp4'
-file 'file:C:/Users/ASUS/manim_portfolio/backend/outputs/videos/temp_scene/480p15/partial_movie_files/GeneratedScene/624642324_3727650268_469676061.mp4'
-file 'file:C:/Users/ASUS/manim_portfolio/backend/outputs/videos/temp_scene/480p15/partial_movie_files/GeneratedScene/624642324_1839128356_2283655235.mp4'

@@ -19,4 +19,4 @@ def delete_all_videos():
                 print(f"[FileService] Deleted folder: {entry}")
     except Exception as e:
         print(f"[FileService] Error: {e}")
-print("[FileService] Remaining files:", list(VIDEO_DIR.iterdir()))
+
