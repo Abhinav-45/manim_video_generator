@@ -20,7 +20,7 @@ COLOR_MAP = {
 def replace_named_colors_with_hex(prompt: str) -> str:
     def color_replacer(match):
         color = match.group(1).lower()
-        return COLOR_MAP.get(color, color)  # fallback to original if unknown
+        return COLOR_MAP.get(color, color)  
 
     return re.sub(r'\b(' + '|'.join(COLOR_MAP.keys()) + r')\b', color_replacer, prompt, flags=re.IGNORECASE)
 
@@ -37,7 +37,7 @@ def extract_transformation_sequence(prompt: str) -> list:
     """Extract transformation sequence of any length from the prompt."""
     prompt_lower = prompt.lower()
     
-    # Define separators for different transformation syntax
+    
     separators = [
         (r'\s+to\s+', ' to '),
         (r'\s*→\s*', '→'),
@@ -49,22 +49,22 @@ def extract_transformation_sequence(prompt: str) -> list:
         (r'\s+changes?\s+into\s+', ' changes into ')
     ]
     
-    # Try each separator type
+    
     for sep_pattern, sep_display in separators:
-        # Split by the separator and clean up
+        
         parts = re.split(sep_pattern, prompt_lower)
         if len(parts) > 1:
-            # Clean each part - extract just the shape/object name
+            
             sequence = []
             for part in parts:
-                # Remove common prefixes/suffixes and extra words
+                
                 cleaned = re.sub(r'\b(a|an|the|from|change|transform|morph)\b', '', part.strip())
                 cleaned = re.sub(r'\b(transformation|into|to)\b.*', '', cleaned).strip()
                 
-                # Extract the main object/shape name (first meaningful word)
+                
                 words = cleaned.split()
                 if words:
-                    # Take the first word that looks like a shape/object
+                    
                     for word in words:
                         if len(word) > 1 and word.isalpha():
                             sequence.append(word)
@@ -73,10 +73,10 @@ def extract_transformation_sequence(prompt: str) -> list:
             if len(sequence) > 1:
                 return sequence
     
-    # Fallback: try to find individual transformation pairs and chain them
+    
     transformation_pairs = []
     
-    # Look for patterns like "X to Y" throughout the text
+    
     pair_patterns = [
         r'\b(\w+)\s+to\s+(\w+)\b',
         r'\b(\w+)\s*→\s*(\w+)\b',
@@ -90,26 +90,26 @@ def extract_transformation_sequence(prompt: str) -> list:
         for match in matches:
             transformation_pairs.append(list(match))
     
-    # If we found pairs, try to chain them into a sequence
+    
     if transformation_pairs:
-        # Start with the first pair
+        
         sequence = list(transformation_pairs[0])
         used_pairs = {0}
         
-        # Try to extend the sequence by finding connecting pairs
+        
         while True:
             extended = False
             for i, pair in enumerate(transformation_pairs):
                 if i in used_pairs:
                     continue
                 
-                # Check if this pair extends our sequence
-                if pair[0] == sequence[-1]:  # pair starts where sequence ends
+                
+                if pair[0] == sequence[-1]:  
                     sequence.append(pair[1])
                     used_pairs.add(i)
                     extended = True
                     break
-                elif pair[1] == sequence[0]:  # pair ends where sequence starts
+                elif pair[1] == sequence[0]:  
                     sequence.insert(0, pair[0])
                     used_pairs.add(i)
                     extended = True
@@ -136,16 +136,16 @@ def refine_prompt(prompt: str) -> str:
     if not prompt:
         return "Show a simple title that says 'Welcome to Manim'."
 
-    # Replace named colors with hex values
+    
     prompt = replace_named_colors_with_hex(prompt)
 
-    # 1. Enhanced transformation logic - now handles any number of transformations
+    
     if is_transformation_request(prompt):
         sequence = extract_transformation_sequence(prompt)
-        print(f"DEBUG: Detected transformation sequence: {sequence}")  # Debug line
+        print(f"DEBUG: Detected transformation sequence: {sequence}")  
         
         if len(sequence) >= 4:
-            # Handle 4+ step transformations
+            
             steps = " → ".join(sequence)
             return f"Create a complex animated transformation sequence: {steps}. Use Manim objects and chained Transform animations with appropriate timing delays between each step. Also fade out the former object while creating the latter object "
         elif len(sequence) == 3:
@@ -153,10 +153,10 @@ def refine_prompt(prompt: str) -> str:
         elif len(sequence) == 2:
             return f"Create a smooth animated transformation: {sequence[0]} transforms into {sequence[1]}. Use appropriate Manim shapes and Transform animation with smooth transitions."
         else:
-            # If we detected transformation keywords but couldn't extract sequence
+            
             return f"Create an animated transformation scene based on: '{prompt}'. Use Manim Transform animations between appropriate geometric shapes."
 
-    # 2. Rule categories (rest of the code remains the same)
+    
     educational_rules = [
         (["explain", "how", "why", "process", "step by step", "procedure"], 
          "Create a step-by-step educational animation explaining the concept with clear visual progression"),

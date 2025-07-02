@@ -1,5 +1,3 @@
-# backend/app/services/gemini_service.py
-
 from dotenv import load_dotenv
 import os
 

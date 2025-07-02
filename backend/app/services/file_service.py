@@ -1,9 +1,6 @@
-# backend/app/services/file_service.py
-
 from pathlib import Path
 import shutil
 
-# 🔥 Define correct path relative to this file
 VIDEO_DIR = (Path(__file__).resolve().parent / "../../outputs/videos").resolve()
 
 def delete_all_videos():

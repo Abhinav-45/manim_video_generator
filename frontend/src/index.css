@@ -37,17 +37,17 @@ body {
   background-repeat: no-repeat;
 }
 
-/* Smooth transitions for all elements */
+
 * {
   transition: all 0.2s ease-in-out;
 }
 
-/* Remove transition from animations */
+
 *[style*="animation"], *[style*="transform"] {
   transition: none;
 }
 
-/* Improve button and input performance */
+
 button, input, textarea, select {
   -webkit-appearance: none;
   appearance: none;
@@ -57,14 +57,14 @@ button, input, textarea, select {
   font-family: inherit;
 }
 
-/* Better text rendering */
+
 h1, h2, h3, h4, h5, h6, p, span, div {
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Fix for mobile viewport */
+
 @supports (-webkit-touch-callout: none) {
   body {
     min-height: -webkit-fill-available;
@@ -75,7 +75,7 @@ h1, h2, h3, h4, h5, h6, p, span, div {
   }
 }
 
-/* Prevent horizontal scroll on mobile */
+
 @media (max-width: 768px) {
   body {
     overflow-x: hidden;

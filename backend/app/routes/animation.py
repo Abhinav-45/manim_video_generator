@@ -1,5 +1,3 @@
-# backend/app/routes/animation.py
-
 from fastapi import APIRouter
 from pydantic import BaseModel
 from app.services.master_agent import run_pipeline
